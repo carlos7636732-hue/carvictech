@@ -1,3 +1,6 @@
+Perfeito! Aqui está o seu código **completo já atualizado**, incluindo o botão do formulário estilizado para ficar igual aos botões de “Contratar” e mantendo tudo junto no mesmo arquivo:
+
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -117,6 +120,22 @@
     from {opacity: 0; transform: translateY(-30px);}
     to {opacity: 1; transform: translateY(0);}
   }
+
+  /* Botão do formulário */
+  .form-btn {
+    padding: 10px 18px;
+    background: #4da6ff;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .form-btn:hover {
+    background: #1e90ff;
+    transform: scale(1.05);
+  }
 </style>
 </head>
 <body>
@@ -133,10 +152,9 @@
     <div class="card"><i class="fas fa-memory"></i> Instalação de memória RAM</div>
     <div class="card"><i class="fas fa-desktop"></i> Montagem de computadores</div>
     <div class="card"><i class="fas fa-cogs"></i> Formatação + Windows</div>
-    <!-- Novo card Geek Uninstaller -->
     <div class="card">
       <i class="fas fa-tools"></i> 
-      <a href="https://geekuninstaller.com/" target="_blank" style="color:#4da6ff;text-decoration:none;">
+      <a href="https://geekuninstaller.com/" target="_blank" rel="noopener noreferrer" style="color:#4da6ff;text-decoration:none;">
         Geek Uninstaller
       </a>
     </div>
@@ -185,7 +203,7 @@
     <input type="text" placeholder="Nome Completo" required>
     <input type="tel" placeholder="Número de Telefone" required>
     <textarea rows="6" placeholder="Descreva o problema..." required></textarea>
-    <button>Solicitar Orçamento</button>
+    <button class="form-btn">Solicitar Orçamento</button>
   </form>
 
   <br>
@@ -193,11 +211,4 @@
   <p>📱 <a href="https://wa.me/553199385768">WhatsApp</a></p>
   <p>📧 <a href="mailto:contato@carvictech.com">contato@carvictech.com</a></p>
   <p>📍 Vale Verde - Minas Gerais</p>
-  <p>🕒 Segunda a Sexta 07:00 às 14:00</p>
-  <p>🕒 Sábado 08:00 às 12:00</p>
-</section>
-
-<a href="https://wa.me/5531990717419" class="whatsapp-btn" aria-label="Abrir WhatsApp"><i class="fab fa-whatsapp"></i></a>
-<a href="responsabilidade.html"><button class="btn">responsabilidade</button></a>
-<footer>
-  <h2>CarVic Tech 
+  <p>�
