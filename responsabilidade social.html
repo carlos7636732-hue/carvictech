@@ -1,117 +1,122 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Racismo no Futebol</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsabilidade Social</title>
 
-<style>
-body{
-    font-family: Arial, sans-serif;
-    background:#f2f2f2;
-    margin:0;
-    padding:40px;
-}
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background:#f4f4f4;
+            margin:0;
+            padding:40px;
+        }
 
-.container{
-    max-width:800px;
-    margin:auto;
-    background:#fff;
-    padding:30px;
-    border-radius:10px;
-    box-shadow:0 0 10px rgba(0,0,0,0.2);
-}
+        .container{
+            max-width:800px;
+            margin:auto;
+            background:white;
+            padding:30px;
+            border-radius:10px;
+            box-shadow:0 0 10px rgba(0,0,0,0.2);
+        }
 
-h1{
-    text-align:center;
-    color:#0b5ed7;
-}
+        h1{
+            text-align:center;
+            color:#004aad;
+        }
 
-p{
-    text-align:justify;
-    line-height:1.8;
-    font-size:18px;
-}
+        p{
+            text-align:justify;
+            line-height:1.8;
+            font-size:18px;
+        }
 
-textarea{
-    width:100%;
-    height:120px;
-    padding:10px;
-    font-size:16px;
-    margin-top:10px;
-}
+        .comentario{
+            margin-top:30px;
+            background:#eeeeee;
+            padding:15px;
+            border-left:5px solid #004aad;
+            border-radius:5px;
+        }
 
-button{
-    padding:10px 20px;
-    margin-top:10px;
-    border:none;
-    border-radius:5px;
-    cursor:pointer;
-    font-size:16px;
-}
+        textarea{
+            width:100%;
+            padding:10px;
+            font-size:16px;
+        }
 
-.enviar{
-    background:#0b5ed7;
-    color:white;
-}
+        button{
+            padding:10px 20px;
+            background:#004aad;
+            color:white;
+            border:none;
+            border-radius:5px;
+            cursor:pointer;
+        }
 
-#comentarios{
-    margin-top:30px;
-}
+        button:hover{
+            background:#003080;
+        }
 
-.comentario{
-    background:#e9ecef;
-    padding:15px;
-    border-radius:8px;
-    margin-top:15px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
+        #listaComentarios{
+            margin-top:20px;
+        }
 
-.excluir{
-    background:red;
-    color:white;
-    border:none;
-    border-radius:50%;
-    width:30px;
-    height:30px;
-    cursor:pointer;
-    font-weight:bold;
-}
+        .itemComentario{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            background:#ffffff;
+            padding:10px;
+            margin-top:10px;
+            border-radius:5px;
+            border:1px solid #ccc;
+        }
 
-.excluir:hover{
-    background:#b30000;
-}
-</style>
+        .excluir{
+            background:red;
+            color:white;
+            border:none;
+            border-radius:50%;
+            width:30px;
+            height:30px;
+            cursor:pointer;
+            font-weight:bold;
+        }
 
+        .excluir:hover{
+            background:darkred;
+        }
+    </style>
 </head>
 <body>
 
 <div class="container">
 
-<h1>Racismo no Futebol</h1>
+    <h1>Responsabilidade Social</h1>
 
-<p>
-O racismo no futebol ainda é um grande problema e afeta jogadores, árbitros e torcedores. Esse tipo de preconceito desrespeita as pessoas e prejudica o esporte, que deve ser um lugar de união, igualdade e respeito para todos.
-</p>
+    <p>
+        A responsabilidade social representa o compromisso de promover o respeito, a igualdade e a inclusão. No futebol, combater o racismo é essencial para garantir que todos os atletas e torcedores sejam tratados com dignidade, independentemente da cor da pele ou da origem.
+    </p>
 
-<p>
-Cada pessoa pode ajudar a combater o racismo denunciando atitudes preconceituosas e incentivando o respeito. Após ler este texto, deixe abaixo sua opinião sobre como podemos acabar com o racismo no futebol.
-</p>
+    <p>
+        O racismo no futebol prejudica o esporte e a sociedade. Por isso, é importante denunciar atitudes preconceituosas, apoiar campanhas de conscientização e incentivar o respeito entre todas as pessoas, tornando o futebol um ambiente mais justo e acolhedor.
+    </p>
 
-<h2>Deixe seu comentário</h2>
+    <div class="comentario">
+        <h3>Comentários</h3>
 
-<textarea id="texto" placeholder="Digite seu comentário aqui..."></textarea>
-<br>
+        <textarea id="textoComentario" placeholder="Escreva seu comentário aqui..." rows="5"></textarea>
 
-<button class="enviar" onclick="enviarComentario()">
-Enviar Comentário
-</button>
+        <br><br>
 
-<div id="comentarios">
-    <h2>Comentários</h2>
-</div>
+        <button onclick="enviarComentario()">Enviar Comentário</button>
+
+        <div id="listaComentarios"></div>
+
+    </div>
 
 </div>
 
@@ -119,24 +124,24 @@ Enviar Comentário
 
 function enviarComentario(){
 
-    let texto = document.getElementById("texto").value;
+    let texto = document.getElementById("textoComentario").value;
 
-    if(texto.trim() == ""){
+    if(texto.trim()==""){
         alert("Digite um comentário!");
         return;
     }
 
-    let comentario = document.createElement("div");
-    comentario.className = "comentario";
+    let novoComentario = document.createElement("div");
+    novoComentario.className = "itemComentario";
 
-    comentario.innerHTML = `
+    novoComentario.innerHTML = `
         <span>${texto}</span>
         <button class="excluir" onclick="this.parentElement.remove()">❌</button>
     `;
 
-    document.getElementById("comentarios").appendChild(comentario);
+    document.getElementById("listaComentarios").appendChild(novoComentario);
 
-    document.getElementById("texto").value = "";
+    document.getElementById("textoComentario").value = "";
 
 }
 
