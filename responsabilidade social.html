@@ -1,3 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Racismo no Futebol</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f2f2f2;
+    margin:0;
+    padding:40px;
+}
+
+.container{
+    max-width:800px;
+    margin:auto;
+    background:#fff;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+h1{
+    text-align:center;
+    color:#0b5ed7;
+}
+
+p{
+    text-align:justify;
+    line-height:1.8;
+    font-size:18px;
+}
+
+textarea{
+    width:100%;
+    height:120px;
+    padding:10px;
+    font-size:16px;
+    margin-top:10px;
+}
+
+button{
+    padding:10px 20px;
+    margin-top:10px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.enviar{
+    background:#0b5ed7;
+    color:white;
+}
+
+#comentarios{
+    margin-top:30px;
+}
+
+.comentario{
+    background:#e9ecef;
+    padding:15px;
+    border-radius:8px;
+    margin-top:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.excluir{
+    background:red;
+    color:white;
+    border:none;
+    border-radius:50%;
+    width:30px;
+    height:30px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.excluir:hover{
+    background:#b30000;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h1>Racismo no Futebol</h1>
+
+<p>
+O racismo no futebol ainda é um grande problema e afeta jogadores, árbitros e torcedores. Esse tipo de preconceito desrespeita as pessoas e prejudica o esporte, que deve ser um lugar de união, igualdade e respeito para todos.
+</p>
+
+<p>
+Cada pessoa pode ajudar a combater o racismo denunciando atitudes preconceituosas e incentivando o respeito. Após ler este texto, deixe abaixo sua opinião sobre como podemos acabar com o racismo no futebol.
+</p>
+
+<h2>Deixe seu comentário</h2>
+
+<textarea id="texto" placeholder="Digite seu comentário aqui..."></textarea>
+<br>
+
+<button class="enviar" onclick="enviarComentario()">
+Enviar Comentário
+</button>
+
+<div id="comentarios">
+    <h2>Comentários</h2>
+</div>
+
+</div>
+
 <script>
 
 function enviarComentario(){
@@ -20,6 +137,10 @@ function enviarComentario(){
     document.getElementById("comentarios").appendChild(comentario);
 
     document.getElementById("texto").value = "";
+
 }
 
 </script>
+
+</body>
+</html>
