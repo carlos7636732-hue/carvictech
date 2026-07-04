@@ -639,6 +639,9 @@
     const link = 'https://wa.me/' + numero + '?text=' + mensagem;
 
     window.open(link, '_blank');
+
+    // Limpa o formulário assim que a solicitação é enviada para o WhatsApp
+    form.reset();
   });
 </script>
 
