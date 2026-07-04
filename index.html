@@ -8,12 +8,71 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
+  :root {
+    --neon-cyan: #00eaff;
+    --neon-magenta: #ff2bd6;
+    --neon-blue: #4da6ff;
+    --bg-deep: #0a0f1c;
+    --panel: #16233a;
+  }
+  * { box-sizing: border-box; }
+  ::selection {
+    background: var(--neon-cyan);
+    color: #04101c;
+  }
   body {
     font-family: 'Roboto', sans-serif;
-    background: #0a0f1c;
+    background: var(--bg-deep);
     color: #fff;
     margin: 0;
+    position: relative;
   }
+
+  /* === Atmosfera gamer: grade cibernética + scanlines + feixe de varredura === */
+  .grid-overlay {
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,234,255,.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,234,255,.07) 1px, transparent 1px);
+    background-size: 42px 42px;
+    animation: gridmove 18s linear infinite;
+    z-index: -2;
+    pointer-events: none;
+  }
+  .crt-overlay {
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,0.025) 0px,
+      rgba(255,255,255,0.025) 1px,
+      transparent 2px,
+      transparent 3px
+    );
+    z-index: -2;
+    pointer-events: none;
+  }
+  .scan-beam {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(0,234,255,.55), transparent);
+    box-shadow: 0 0 12px 2px rgba(0,234,255,.4);
+    z-index: -1;
+    animation: scanmove 7s linear infinite;
+    pointer-events: none;
+  }
+  @keyframes gridmove {
+    0% { background-position: 0 0, 0 0; }
+    100% { background-position: 42px 42px, 42px 42px; }
+  }
+  @keyframes scanmove {
+    0% { top: -2%; }
+    100% { top: 102%; }
+  }
+
   header {
     background: url('banner.jpg') center/cover no-repeat;
     height: 60vh;
@@ -21,19 +80,71 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+    position: relative;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(10,15,28,.2) 0%, rgba(10,15,28,.85) 100%);
+    pointer-events: none;
   }
   header h1 {
     font-family: 'Montserrat', sans-serif;
     font-size: 3rem;
-    color: #4da6ff;
-    text-shadow: 2px 2px 8px #000;
-    animation: fadeInDown 1.5s ease;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 2px 2px 8px #000, 0 0 18px rgba(0,234,255,.55);
+    animation: fadeInDown 1.5s ease, glitch 6s infinite;
+    position: relative;
+    z-index: 1;
+  }
+  @keyframes glitch {
+    0%, 95%, 100% {
+      text-shadow: 2px 2px 8px #000, 0 0 18px rgba(0,234,255,.55);
+      transform: translate(0,0);
+    }
+    96% {
+      text-shadow: -2px 0 var(--neon-magenta), 2px 0 var(--neon-cyan), 2px 2px 8px #000;
+      transform: translate(-2px, 1px);
+    }
+    97% {
+      text-shadow: 2px 0 var(--neon-magenta), -2px 0 var(--neon-cyan), 2px 2px 8px #000;
+      transform: translate(2px, -1px);
+    }
+    98% {
+      text-shadow: -1px 0 var(--neon-cyan), 1px 0 var(--neon-magenta), 2px 2px 8px #000;
+      transform: translate(-1px, 0);
+    }
   }
   section {
     padding: 40px;
     max-width: 1100px;
     margin: auto;
     animation: fadeInUp 1.5s ease;
+    position: relative;
+  }
+  section h2 {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1.3rem;
+    color: #fff;
+    margin-bottom: 28px;
+  }
+  section h2::before,
+  section h2::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--neon-cyan));
+  }
+  section h2::after {
+    background: linear-gradient(90deg, var(--neon-magenta), transparent);
   }
   .cards {
     display: grid;
@@ -41,15 +152,43 @@
     gap: 20px;
   }
   .card {
-    background: #16233a;
+    background: var(--panel);
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 6px;
     text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    border: 1px solid rgba(0,234,255,.15);
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
   }
+  .card i {
+    color: var(--neon-cyan);
+    text-shadow: 0 0 8px rgba(0,234,255,.6);
+    margin-right: 6px;
+  }
+  .card::before,
+  .card::after {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-color: var(--neon-cyan);
+    border-style: solid;
+    border-width: 0;
+    opacity: .55;
+    transition: all .3s ease;
+  }
+  .card::before { top: -1px; left: -1px; border-top-width: 2px; border-left-width: 2px; }
+  .card::after { bottom: -1px; right: -1px; border-bottom-width: 2px; border-right-width: 2px; }
   .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5), 0 0 18px rgba(0,234,255,.3), inset 0 0 18px rgba(0,234,255,.05);
+    border-color: rgba(0,234,255,.6);
+  }
+  .card:hover::before,
+  .card:hover::after {
+    width: 22px;
+    height: 22px;
+    opacity: 1;
   }
   .precos {
     display: grid;
@@ -57,31 +196,65 @@
     gap: 20px;
   }
   .plano {
-    background: #16233a;
+    background: var(--panel);
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 6px;
     text-align: center;
-    transition: transform 0.3s;
+    position: relative;
+    border: 1px solid rgba(0,234,255,.15);
+    border-top: 3px solid var(--neon-cyan);
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
   }
+  .plano::before,
+  .plano::after {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-color: var(--neon-magenta);
+    border-style: solid;
+    border-width: 0;
+    opacity: .55;
+    transition: all .3s ease;
+  }
+  .plano::before { top: -1px; left: -1px; border-top-width: 2px; border-left-width: 2px; }
+  .plano::after { bottom: -1px; right: -1px; border-bottom-width: 2px; border-right-width: 2px; }
   .plano:hover {
     transform: scale(1.05);
+    box-shadow: 0 0 22px rgba(0,234,255,.35), inset 0 0 20px rgba(0,234,255,.05);
+    border-color: rgba(0,234,255,.6);
+  }
+  .plano:hover::before,
+  .plano:hover::after {
+    width: 22px;
+    height: 22px;
+    opacity: 1;
   }
   .plano h3 {
     font-family: 'Montserrat', sans-serif;
-    color: #4da6ff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1rem;
+    color: var(--neon-cyan);
+    text-shadow: 0 0 8px rgba(0,234,255,.4);
   }
   .plano a {
     display: inline-block;
     margin-top: 10px;
     padding: 10px 18px;
-    background: #4da6ff;
-    border-radius: 5px;
-    color: #fff;
+    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-blue));
+    color: #04101c;
+    font-weight: 600;
+    letter-spacing: .5px;
     text-decoration: none;
-    transition: background 0.3s;
+    clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+    box-shadow: 0 0 12px rgba(0,234,255,.4);
+    transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
   }
   .plano a:hover {
-    background: #1e90ff;
+    background: linear-gradient(135deg, var(--neon-blue), var(--neon-magenta));
+    box-shadow: 0 0 20px rgba(0,234,255,.7), 0 0 30px rgba(255,43,214,.35);
+    transform: translateY(-2px);
   }
   footer {
     text-align: center;
@@ -102,7 +275,10 @@
     border-radius: 50%;
     text-decoration: none;
     font-size: 24px;
+    border: 2px solid rgba(0,234,255,.5);
+    box-shadow: 0 0 14px rgba(0,234,255,.35);
     animation: pulse 1.5s infinite;
+    z-index: 999;
   }
   @keyframes pulse {
     0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.7); }
@@ -120,22 +296,53 @@
 
   /* Botão do formulário */
   .form-btn {
-    padding: 10px 18px;
-    background: #4da6ff;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-blue));
     border: none;
-    border-radius: 5px;
-    color: #fff;
+    color: #04101c;
+    font-weight: 600;
+    letter-spacing: .5px;
+    text-transform: uppercase;
     font-size: 1rem;
     cursor: pointer;
-    transition: background 0.3s, transform 0.2s;
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    box-shadow: 0 0 12px rgba(0,234,255,.4);
+    transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
   }
   .form-btn:hover {
-    background: #1e90ff;
-    transform: scale(1.05);
+    background: linear-gradient(135deg, var(--neon-blue), var(--neon-magenta));
+    box-shadow: 0 0 20px rgba(0,234,255,.7), 0 0 30px rgba(255,43,214,.35);
+    transform: scale(1.03);
+  }
+
+  /* Campos do formulário com toque gamer */
+  form input,
+  form textarea {
+    background: var(--panel);
+    border: 1px solid rgba(0,234,255,.25);
+    border-radius: 4px;
+    padding: 12px 14px;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  form input:focus,
+  form textarea:focus {
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 10px rgba(0,234,255,.35);
+  }
+  form input::placeholder,
+  form textarea::placeholder {
+    color: rgba(255,255,255,.4);
   }
 </style>
 </head>
 <body>
+
+<div class="grid-overlay"></div>
+<div class="crt-overlay"></div>
+<div class="scan-beam"></div>
 
 <header>
   <h1>CarVic Tech</h1>
@@ -216,7 +423,8 @@
   <p>🔗 <a href="responsabilidade social.html"><button class="btn">responsabilidade social</button></a></p>
 </section>
 
-<a href="https://wa.me/553199385768" target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+<!-- Botão flutuante do WhatsApp: abre em nova aba do navegador -->
+<a href="https://wa.me/553199385768" target="_blank" rel="noopener noreferrer" class="whatsapp-btn" aria-label="Falar no WhatsApp">
   <i class="fab fa-whatsapp"></i>
 </a>
 
