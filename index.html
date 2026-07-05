@@ -28,21 +28,6 @@
     position: relative;
   }
 
-  /* === Fundo com a imagem gamer, com leve efeito de "água mexendo" === */
-  .bg-layer {
-    position: fixed;
-    inset: -6%;
-    background: url('fundo-gamer.png') center/cover no-repeat;
-    z-index: -3;
-    filter: brightness(.6) saturate(1.15);
-    animation: bgDrift 14s ease-in-out infinite alternate;
-  }
-  @keyframes bgDrift {
-    0%   { transform: scale(1.06) translate(0%, 0%) rotate(0deg); }
-    50%  { transform: scale(1.10) translate(-1.2%, 1%) rotate(.3deg); }
-    100% { transform: scale(1.06) translate(1.2%, -1%) rotate(-.3deg); }
-  }
-
   /* === Atmosfera gamer: grade cibernética + scanlines + feixe de varredura === */
   .grid-overlay {
     position: fixed;
@@ -89,6 +74,7 @@
   }
 
   header {
+    background: url('banner.jpg') center/cover no-repeat;
     height: 60vh;
     display: flex;
     align-items: center;
@@ -100,7 +86,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(10,15,28,.15) 0%, rgba(10,15,28,.8) 100%);
+    background: linear-gradient(180deg, rgba(10,15,28,.2) 0%, rgba(10,15,28,.85) 100%);
     pointer-events: none;
   }
   header h1 {
@@ -459,7 +445,6 @@
 </head>
 <body>
 
-<div class="bg-layer"></div>
 <div class="grid-overlay"></div>
 <div class="crt-overlay"></div>
 <div class="scan-beam"></div>
