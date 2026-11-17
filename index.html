@@ -462,6 +462,32 @@
     transform: translate(-50%,-50%) scale(1);
   }
 
+  /* === Logo no topo === */
+  header { min-height: 60vh; height: auto; padding: 28px 16px; }
+  .logo-moldura {
+    position: relative;
+    z-index: 1;
+    padding: 3px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-blue) 45%, var(--neon-magenta));
+    box-shadow: 0 0 22px rgba(0,234,255,.45), 0 0 46px rgba(255,43,214,.35);
+    animation: fadeInDown 1.2s ease;
+  }
+  .logo-moldura img {
+    display: block;
+    width: min(86vw, 520px);
+    height: auto;
+    border-radius: 11px;
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
   /* === Black Friday === */
   .bf {
     border: 1px solid var(--neon-magenta);
@@ -543,7 +569,10 @@
 </div>
 
 <header>
-  <h1>CarVic Tech</h1>
+  <h1 class="sr-only">CarVic Tech</h1>
+  <div class="logo-moldura">
+    <img src="logo.jpg" alt="Logo CarVic Tech: ninja gamer com controle, PC gamer e dragão vermelho" width="1000" height="1000">
+  </div>
 </header>
 
 <!-- Black Friday: some sozinha depois de 27/11/2026 -->
