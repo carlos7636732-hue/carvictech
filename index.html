@@ -461,6 +461,50 @@
   .radio-opcao input[type="radio"]:checked + .radio-marca::after {
     transform: translate(-50%,-50%) scale(1);
   }
+
+  /* === Black Friday === */
+  .bf {
+    border: 1px solid var(--neon-magenta);
+    background: linear-gradient(135deg, rgba(255,43,214,.16), rgba(0,234,255,.08)), var(--panel);
+    border-radius: 6px;
+    padding: 32px 20px;
+    text-align: center;
+    box-shadow: 0 0 26px rgba(255,43,214,.28), inset 0 0 20px rgba(255,43,214,.06);
+  }
+  .bf-titulo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(1.8rem, 6vw, 2.8rem);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 0 0 16px rgba(255,43,214,.7), 2px 2px 6px #000;
+    margin: 0 0 8px;
+  }
+  .bf-oferta { font-size: 1.15rem; margin: 0 0 4px; }
+  .bf-oferta strong { color: var(--neon-cyan); text-shadow: 0 0 8px rgba(0,234,255,.5); }
+  .bf-sub { color: rgba(255,255,255,.7); margin: 0 0 22px; }
+  .bf-timer {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .bf-timer div {
+    min-width: 76px;
+    padding: 10px 8px;
+    background: #0b1628;
+    border: 1px solid rgba(0,234,255,.4);
+    border-radius: 4px;
+  }
+  .bf-timer strong {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.9rem;
+    color: var(--neon-cyan);
+    text-shadow: 0 0 10px rgba(0,234,255,.6);
+  }
+  .bf-timer span { font-size: .75rem; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,.7); }
+  .bf .form-btn { display: inline-block; text-decoration: none; }
 </style>
 </head>
 <body>
@@ -501,6 +545,22 @@
 <header>
   <h1>CarVic Tech</h1>
 </header>
+
+<!-- Black Friday: some sozinha depois de 27/11/2026 -->
+<section id="bf">
+  <div class="bf">
+    <h2 class="bf-titulo" style="display:block;">Black Friday</h2>
+    <p class="bf-oferta">Até <strong>20% de desconto</strong> em serviços selecionados</p>
+    <p class="bf-sub">Oferta válida até 27/11. Garanta o seu horário pelo WhatsApp.</p>
+    <div class="bf-timer" aria-live="off">
+      <div><strong id="bf-d">00</strong><span>dias</span></div>
+      <div><strong id="bf-h">00</strong><span>horas</span></div>
+      <div><strong id="bf-m">00</strong><span>min</span></div>
+      <div><strong id="bf-s">00</strong><span>seg</span></div>
+    </div>
+    <a class="form-btn" href="https://wa.me/553199385768?text=Quero%20aproveitar%20a%20Black%20Friday" target="_blank" rel="noopener noreferrer">Aproveitar oferta</a>
+  </div>
+</section>
 
 <section>
   <h2>🛠️ Nossos Serviços</h2>
@@ -692,6 +752,23 @@
     // Limpa o formulário assim que a solicitação é enviada para o WhatsApp
     form.reset();
   });
+
+  // Contagem regressiva da Black Friday (fim: 27/11/2026 às 23:59, horário de Brasília)
+  (function () {
+    const fim = new Date('2026-11-27T23:59:59-03:00').getTime();
+    const bf = document.getElementById('bf');
+    const pad = n => String(n).padStart(2, '0');
+    function tick() {
+      const resto = fim - Date.now();
+      if (resto <= 0) { bf.style.display = 'none'; return false; }
+      document.getElementById('bf-d').textContent = pad(Math.floor(resto / 86400000));
+      document.getElementById('bf-h').textContent = pad(Math.floor(resto / 3600000) % 24);
+      document.getElementById('bf-m').textContent = pad(Math.floor(resto / 60000) % 60);
+      document.getElementById('bf-s').textContent = pad(Math.floor(resto / 1000) % 60);
+      return true;
+    }
+    if (tick()) setInterval(tick, 1000);
+  })();
 </script>
 
 </body>
